@@ -1,19 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import * as React from "react";
+import { FC } from "react";
+import { render } from "react-dom";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import { SpaceViewer } from "./SpaceViewer";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import "./style.css";
+
+const App: FC = () => {
+  return (
+    <div style={{ padding: "0 1rem" }}>
+      <h1>Hello world - React</h1>
+      <p>
+        This example demonstrates a basic integration of Smplrspace using the
+        smplr-loader NPM package, providing a typed version of smplr.js
+        automatically in your React app.
+      </p>
+      <p>
+        <a href="https://docs.smplrspace.com" target="_blank" rel="noreferrer">
+          Learn more in the docs
+        </a>
+      </p>
+      <SpaceViewer />
+    </div>
+  );
+};
+
+render(<App />, document.getElementById("root"));
