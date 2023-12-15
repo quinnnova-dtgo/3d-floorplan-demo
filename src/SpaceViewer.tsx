@@ -16,6 +16,12 @@ export const SpaceViewer: FC = () => {
           preview: true,
           onReady: () => console.log("Viewer is ready"),
           onError: (error) => console.error("Could not start viewer", error),
+          renderOptions: {
+            walls: {
+              alpha: 0.18,
+              maxHeightCm: 120,
+            },
+          },
         });
       })
       .catch((error) => console.error(error));
