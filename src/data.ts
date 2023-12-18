@@ -286,15 +286,15 @@ export interface Sensor extends UnknownData {
   id: string;
 }
 export const sensors = [
-  {
-    id: "IW27",
-    position: {
-      levelIndex: 0,
-      x: 17.441829681396484,
-      z: -15.135374069213867,
-      elevation: 2,
-    },
-  },
+  // {
+  //   id: "IW27",
+  //   position: {
+  //     levelIndex: 0,
+  //     x: 17.441829681396484,
+  //     z: -15.135374069213867,
+  //     elevation: 2,
+  //   },
+  // },
   {
     id: "FB50",
     position: {

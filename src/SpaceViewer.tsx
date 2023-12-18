@@ -5,6 +5,7 @@ import { Space } from "@smplrspace/smplr-loader/dist/generated/smplr";
 import { evolve, map } from "ramda";
 
 import { stalls, sensors, beacons, Stall, Sensor, Beacon } from "./data";
+import ThermostatServices from "./ThermostatServices";
 
 const INITIAL_MODE = "3d";
 
@@ -12,6 +13,9 @@ export const SpaceViewer: FC = () => {
   const spaceRef = React.useRef<Space>();
 
   const [viewerReady, setViewerReady] = useState(false);
+
+  // handle weather
+  const [weather, setWeather] = useState(0);
 
   // handle 2d/3d modes
   const [mode, setMode] = useState<"2d" | "3d">(INITIAL_MODE);
@@ -21,6 +25,13 @@ export const SpaceViewer: FC = () => {
       position: { elevation: (value: number) => (mode === "3d" ? value : 0) },
     })
   );
+
+  const fetchCurrentWeather = () => {
+    ThermostatServices.getCurrent().then((response: any) => {
+      console.log(response);
+      setWeather(response.data.main.temp);
+    });
+  };
 
   useEffect(() => {
     // we recommend using the default value 'esm' in your code but stackblitz required 'umd'
@@ -46,6 +57,10 @@ export const SpaceViewer: FC = () => {
       .catch((error) => console.error(error));
   }, []);
 
+  useEffect(() => {
+    fetchCurrentWeather();
+  }, []);
+
   // show data when viewer ready
   useEffect(() => {
     if (!viewerReady) {
@@ -62,6 +77,7 @@ export const SpaceViewer: FC = () => {
       alpha: 0.7,
       height: mode === "3d" ? 1.9 : 0.0045,
     });
+
     spaceRef.current?.addDataLayer<Sensor>({
       id: "sensors",
       type: "point",
@@ -70,6 +86,28 @@ export const SpaceViewer: FC = () => {
       color: "#357afc",
       diameter: 0.4,
     });
+
+    const weatherSensors = [
+      {
+        id: "IW27",
+        position: {
+          levelIndex: 0,
+          x: 17.441829681396484,
+          z: -15.135374069213867,
+          elevation: 2,
+        },
+      },
+    ];
+
+    spaceRef.current?.addDataLayer<Sensor>({
+      id: "weatherSensors",
+      type: "point",
+      data: autoElevation(weatherSensors),
+      tooltip: (d) => `Temperature ${weather}`,
+      color: "#357afc",
+      diameter: 0.4,
+    });
+
     return () => {
       spaceRef.current?.removeDataLayer("stalls");
       spaceRef.current?.removeDataLayer("sensors");
