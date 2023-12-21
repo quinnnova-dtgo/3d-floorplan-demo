@@ -2,6 +2,26 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Installation
+
+1. Clone the repository:
+
+```bash
+https://github.com/quinnnova-dtgo/3d-floorplan-demo.git
+```
+
+2. Change into the project directory:
+
+```bash
+cd 3d-floorplan-demo
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -38,6 +58,26 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Deployment
+
+This project can be easily run using Docker Compose. Follow the steps below:
+
+1. Build the app for production:
+
+```bash
+npm run build
+```
+
+2. Make sure Docker and Docker Compose are installed on your machine.
+
+3. Run the following command to start the project using Docker Compose:
+
+```bash
+docker compose -f ./docker/docker-compose.yml -f ./docker/docker-compose.prod.yml up -d
+```
+
+4. Access the application at [http://localhost:your-port](http://localhost:your-port) in your web browser.
 
 ## Learn More
 
